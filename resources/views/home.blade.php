@@ -332,7 +332,18 @@
                 const data = await response.json();
                 
                 if (data.error) {
-                    container.innerHTML = '<div class="col-span-full text-center text-red-400 py-4">Unable to load artists</div>';
+                    const needsReauth = data.error.includes('Missing permissions') || 
+                                       data.error.includes('Failed to refresh token') || 
+                                       data.error.includes('not configured') ||
+                                       data.error.includes('Insufficient');
+                    const errorMsg = needsReauth
+                        ? `<div class="col-span-full text-center py-4">
+                            <div class="text-red-400 mb-2">Unable to load artists</div>
+                            <div class="text-slate-500 text-xs mb-3">${data.error}</div>
+                            <a href="${data.reauthorize_url || '/spotify/auth'}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-xs font-medium transition-colors">Re-authorize Spotify</a>
+                        </div>`
+                        : `<div class="col-span-full text-center text-red-400 py-4">${data.error}</div>`;
+                    container.innerHTML = errorMsg;
                     return;
                 }
                 
@@ -378,7 +389,18 @@
                 const data = await response.json();
                 
                 if (data.error) {
-                    container.innerHTML = '<div class="text-center text-red-400 py-4">Unable to load tracks</div>';
+                    const needsReauth = data.error.includes('Missing permissions') || 
+                                       data.error.includes('Failed to refresh token') || 
+                                       data.error.includes('not configured') ||
+                                       data.error.includes('Insufficient');
+                    const errorMsg = needsReauth
+                        ? `<div class="text-center py-4">
+                            <div class="text-red-400 mb-2">Unable to load tracks</div>
+                            <div class="text-slate-500 text-xs mb-3">${data.error}</div>
+                            <a href="${data.reauthorize_url || '/spotify/auth'}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-xs font-medium transition-colors">Re-authorize Spotify</a>
+                        </div>`
+                        : `<div class="text-center text-red-400 py-4">${data.error}</div>`;
+                    container.innerHTML = errorMsg;
                     return;
                 }
                 

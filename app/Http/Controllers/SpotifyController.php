@@ -176,7 +176,7 @@ class SpotifyController extends Controller
         $refreshToken = env('SPOTIFY_REFRESH_TOKEN');
 
         if (!$clientId || !$clientSecret || !$refreshToken) {
-            return null;
+            return ['error' => 'Spotify credentials not configured'];
         }
 
         $tokenResponse = Http::asForm()->post('https://accounts.spotify.com/api/token', [
@@ -187,7 +187,8 @@ class SpotifyController extends Controller
         ]);
 
         if (!$tokenResponse->successful()) {
-            return null;
+            $errorData = $tokenResponse->json();
+            return ['error' => 'Failed to refresh token: ' . ($errorData['error_description'] ?? 'Unknown error')];
         }
 
         return $tokenResponse->json()['access_token'];
@@ -196,6 +197,10 @@ class SpotifyController extends Controller
     public function topArtists(Request $request)
     {
         $accessToken = $this->getAccessToken();
+        
+        if (is_array($accessToken) && isset($accessToken['error'])) {
+            return response()->json($accessToken, 500);
+        }
         
         if (!$accessToken) {
             return response()->json(['error' => 'Authentication failed'], 500);
@@ -212,7 +217,23 @@ class SpotifyController extends Controller
                 ]);
             
             if (!$response->successful()) {
-                return response()->json(['error' => 'Failed to fetch top artists'], 500);
+                $errorData = $response->json();
+                $statusCode = $response->status();
+                
+                if ($statusCode === 403 || ($errorData['error']['message'] ?? '') === 'Insufficient client scope') {
+                    return response()->json([
+                        'error' => 'Missing permissions. Please re-authorize with all required scopes.',
+                        'reauthorize_url' => url('/spotify/auth')
+                    ], 403);
+                }
+                
+                return response()->json([
+                    'error' => 'Failed to fetch top artists: ' . ($errorData['error']['message'] ?? 'HTTP ' . $statusCode)
+                ], 500);
+            }
+            
+            if (!isset($response->json()['items']) || empty($response->json()['items'])) {
+                return response()->json(['error' => 'No top artists data available'], 404);
             }
             
             $artists = array_map(function($artist) {
@@ -235,6 +256,10 @@ class SpotifyController extends Controller
     {
         $accessToken = $this->getAccessToken();
         
+        if (is_array($accessToken) && isset($accessToken['error'])) {
+            return response()->json($accessToken, 500);
+        }
+        
         if (!$accessToken) {
             return response()->json(['error' => 'Authentication failed'], 500);
         }
@@ -250,7 +275,23 @@ class SpotifyController extends Controller
                 ]);
             
             if (!$response->successful()) {
-                return response()->json(['error' => 'Failed to fetch top tracks'], 500);
+                $errorData = $response->json();
+                $statusCode = $response->status();
+                
+                if ($statusCode === 403 || ($errorData['error']['message'] ?? '') === 'Insufficient client scope') {
+                    return response()->json([
+                        'error' => 'Missing permissions. Please re-authorize with all required scopes.',
+                        'reauthorize_url' => url('/spotify/auth')
+                    ], 403);
+                }
+                
+                return response()->json([
+                    'error' => 'Failed to fetch top tracks: ' . ($errorData['error']['message'] ?? 'HTTP ' . $statusCode)
+                ], 500);
+            }
+            
+            if (!isset($response->json()['items']) || empty($response->json()['items'])) {
+                return response()->json(['error' => 'No top tracks data available'], 404);
             }
             
             $tracks = array_map(function($track) {
@@ -273,6 +314,10 @@ class SpotifyController extends Controller
     public function recentlyPlayed(Request $request)
     {
         $accessToken = $this->getAccessToken();
+        
+        if (is_array($accessToken) && isset($accessToken['error'])) {
+            return response()->json($accessToken, 500);
+        }
         
         if (!$accessToken) {
             return response()->json(['error' => 'Authentication failed'], 500);
@@ -311,6 +356,10 @@ class SpotifyController extends Controller
     public function playlists(Request $request)
     {
         $accessToken = $this->getAccessToken();
+        
+        if (is_array($accessToken) && isset($accessToken['error'])) {
+            return response()->json($accessToken, 500);
+        }
         
         if (!$accessToken) {
             return response()->json(['error' => 'Authentication failed'], 500);
@@ -377,6 +426,10 @@ class SpotifyController extends Controller
     {
         $accessToken = $this->getAccessToken();
         
+        if (is_array($accessToken) && isset($accessToken['error'])) {
+            return response()->json($accessToken, 500);
+        }
+        
         if (!$accessToken) {
             return response()->json(['error' => 'Authentication failed'], 500);
         }
@@ -411,6 +464,10 @@ class SpotifyController extends Controller
     public function topAlbums(Request $request)
     {
         $accessToken = $this->getAccessToken();
+        
+        if (is_array($accessToken) && isset($accessToken['error'])) {
+            return response()->json($accessToken, 500);
+        }
         
         if (!$accessToken) {
             return response()->json(['error' => 'Authentication failed'], 500);
@@ -457,6 +514,10 @@ class SpotifyController extends Controller
     public function stats()
     {
         $accessToken = $this->getAccessToken();
+        
+        if (is_array($accessToken) && isset($accessToken['error'])) {
+            return response()->json($accessToken, 500);
+        }
         
         if (!$accessToken) {
             return response()->json(['error' => 'Authentication failed'], 500);
