@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tom Shafer - tjshafer.com</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
@@ -17,9 +21,14 @@
         <header class="border-b border-slate-800">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <nav class="flex items-center justify-between h-16">
-                    <div class="text-lg font-semibold text-white">
-                        tjshafer.com
-                    </div>
+                    <a href="/" class="flex items-center gap-3 group">
+                        <div class="flex items-center justify-center">
+                            <img src="/logo.svg" alt="TJ Shafer Logo" class="h-7 w-auto opacity-90 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <span class="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors hidden sm:block">
+                            tjshafer.com
+                        </span>
+                    </a>
                     <div class="flex items-center gap-8">
                         <a href="#about" class="text-slate-400 hover:text-white transition-colors text-sm font-medium">About</a>
                         <a href="#music" class="text-slate-400 hover:text-white transition-colors text-sm font-medium">Music</a>
