@@ -59,7 +59,23 @@ class PrivateInboxFeedTest extends TestCase
         $response->assertSee('<rss version="2.0"', false);
         $response->assertSee('Contact · Alex', false);
         $response->assertSee('Booking · Pat', false);
-        $response->assertSee('#contact-', false);
-        $response->assertSee('#booking-', false);
+        $response->assertSee('inbox=contact-', false);
+        $response->assertSee('inbox=booking-', false);
+    }
+
+    public function test_inbox_feed_uses_app_url_for_atom_self_when_host_is_public(): void
+    {
+        $token = $this->token();
+        config(['site.inbox_feed_token' => $token]);
+        config(['site.app_url' => 'https://tjshafer.com']);
+
+        $response = $this->get('/feed/inbox/'.$token);
+
+        $response->assertOk();
+        $response->assertSee(
+            'href="https://tjshafer.com/feed/inbox/'.$token.'"',
+            false
+        );
+        $response->assertSee('<link>https://tjshafer.com/</link>', false);
     }
 }

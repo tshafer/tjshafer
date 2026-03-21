@@ -10,8 +10,8 @@
         @foreach ($items as $item)
             <item>
                 <title>{{ e($item['title']) }}</title>
-                {{-- Unique link per item: many readers treat duplicate &lt;link&gt; as one story --}}
-                <link>{{ $siteUrl }}/#{{ e($item['guid']) }}</link>
+                {{-- Unique link per item (query avoids readers that mishandle fragment-only URLs) --}}
+                <link>{{ $siteUrl }}/?inbox={{ rawurlencode($item['guid']) }}</link>
                 <guid isPermaLink="false">{{ e($item['guid']) }}</guid>
                 <pubDate>{{ $item['pubDate'] }}</pubDate>
                 <description>{{ e($item['description']) }}</description>

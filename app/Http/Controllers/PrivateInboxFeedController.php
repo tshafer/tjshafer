@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\ContactMessage;
+use DateTimeInterface;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 
 class PrivateInboxFeedController extends Controller
 {
-    public function __invoke(string $token): Response
+    public function __invoke(Request $request, string $token): Response
     {
         $expected = config('site.inbox_feed_token');
         $expected = is_string($expected) ? trim($expected) : '';
@@ -19,12 +21,21 @@ class PrivateInboxFeedController extends Controller
             abort(404);
         }
 
-        $siteUrl = rtrim((string) config('site.app_url'), '/');
+        /*
+         * NetNewsWire compares the subscription URL to <atom:link rel="self">.
+         *
+         * Prefer APP_URL when it looks like a public site (not localhost) so production
+         * matches https://tjshafer.com even behind a reverse proxy that presents http://
+         * internally. Fall back to the request host for local Valet / artisan serve.
+         */
+        $siteUrl = $this->publicBaseUrl($request);
         $feedUrl = $siteUrl.'/feed/inbox/'.$token;
         $tz = config('booking.timezone', 'America/Phoenix');
 
         $items = $this->collectItems($tz);
-        $lastBuildDate = $items->isNotEmpty() ? $items->first()['pubDate'] : now('UTC')->format('r');
+        $lastBuildDate = $items->isNotEmpty()
+            ? $items->first()['pubDate']
+            : now('UTC')->format(DateTimeInterface::RSS);
 
         return response()
             ->view('feed.inbox', [
@@ -36,6 +47,20 @@ class PrivateInboxFeedController extends Controller
             ->header('Content-Type', 'application/rss+xml; charset=UTF-8')
             ->header('X-Robots-Tag', 'noindex, nofollow, noarchive')
             ->header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    }
+
+    private function publicBaseUrl(Request $request): string
+    {
+        $fromConfig = rtrim((string) config('site.app_url'), '/');
+
+        if ($fromConfig !== '') {
+            $host = parse_url($fromConfig, PHP_URL_HOST);
+            if (is_string($host) && ! in_array($host, ['localhost', '127.0.0.1', '[::1]'], true)) {
+                return $fromConfig;
+            }
+        }
+
+        return rtrim($request->getSchemeAndHttpHost(), '/');
     }
 
     /**
@@ -59,7 +84,7 @@ class PrivateInboxFeedController extends Controller
                 'sort' => $booking->created_at->timestamp,
                 'guid' => 'booking-'.$booking->getKey(),
                 'title' => 'Booking · '.$booking->name.' ('.$booking->status.')',
-                'pubDate' => $booking->created_at->clone()->utc()->format('r'),
+                'pubDate' => $booking->created_at->clone()->utc()->format(DateTimeInterface::RSS),
                 'description' => $body,
             ]);
         }
@@ -71,7 +96,7 @@ class PrivateInboxFeedController extends Controller
                 'sort' => $msg->created_at->timestamp,
                 'guid' => 'contact-'.$msg->getKey(),
                 'title' => 'Contact · '.$msg->name,
-                'pubDate' => $msg->created_at->clone()->utc()->format('r'),
+                'pubDate' => $msg->created_at->clone()->utc()->format(DateTimeInterface::RSS),
                 'description' => $body,
             ]);
         }
