@@ -1,0 +1,42 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Tom Shafer",
+    "label": "Web developer",
+    "email": "tj@tjshafer.com",
+    "url": "https://tjshafer.com",
+    "summary": "Software developer based in Arizona. Work is conducted under Shafer LLC.",
+    "location": {
+      "city": "Arizona",
+      "countryCode": "US"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "tomshafer",
+        "url": "https://github.com/tomshafer"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Shafer LLC",
+      "position": "Owner / Developer",
+      "startDate": "2020-01",
+      "summary": "Consulting, product work, and client engineering under the LLC.",
+      "highlights": [
+        "Replace with shipped outcomes, clients, or product names you can share."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Web",
+      "keywords": ["Laravel", "PHP", "JavaScript", "Tailwind CSS"]
+    }
+  ],
+  "meta": {
+    "version": "1.0.0",
+    "lastModified": "2025-03-21"
+  }
+}

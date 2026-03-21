@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Placeholder: local meetup talk",
+        "event": "Arizona PHP / Laravel Meetup",
+        "date": "2024-11",
+        "format": "Talk",
+        "url": "",
+        "notes": "Replace with real appearances — podcasts, conferences, live streams."
+    },
+    {
+        "title": "Placeholder: podcast guest spot",
+        "event": "Developer podcast",
+        "date": "2025-01",
+        "format": "Podcast",
+        "url": "",
+        "notes": "Add Spotify/YouTube or show links when available."
+    }
+]

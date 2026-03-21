@@ -1,0 +1,24 @@
+[
+    {
+        "slug": "tjshafer-com",
+        "title": "This site (tjshafer.com)",
+        "summary": "Personal site for Shafer LLC: Laravel, Tailwind, Spotify integration, RSS, and content in Markdown/JSON.",
+        "outcome": "Single deployable app that doubles as a portfolio shell and playground for small features.",
+        "stack": ["Laravel 13", "PHP 8.5", "Tailwind CSS 4", "Vite"],
+        "links": {
+            "live": "https://tjshafer.com"
+        },
+        "featured": true
+    },
+    {
+        "slug": "shafer-llc-presence",
+        "title": "Shafer LLC web presence",
+        "summary": "Brand-forward pages tying personal work to the LLC entity, with clear contact and project entry points.",
+        "outcome": "Visitors see both the person and the business in one coherent story.",
+        "stack": ["Laravel", "Blade", "Design system"],
+        "links": {
+            "live": "https://shafer.llc"
+        },
+        "featured": true
+    }
+]
