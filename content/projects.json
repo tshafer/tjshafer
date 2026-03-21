@@ -12,12 +12,23 @@
     },
     {
         "slug": "shafer-llc-presence",
-        "title": "Shafer LLC web presence",
-        "summary": "Brand-forward pages tying personal work to the LLC entity, with clear contact and project entry points.",
-        "outcome": "Visitors see both the person and the business in one coherent story.",
-        "stack": ["Laravel", "Blade", "Design system"],
+        "title": "shafer.llc",
+        "summary": "Company site for Shafer LLC — brand, contact, and how to work together.",
+        "outcome": "Single place on the web for the Arizona LLC and its services.",
+        "stack": ["Web", "Design system"],
         "links": {
             "live": "https://shafer.llc"
+        },
+        "featured": true
+    },
+    {
+        "slug": "placehold-cloud",
+        "title": "placehold.cloud",
+        "summary": "Placeholder image and asset service — quick, predictable URLs for layouts and prototypes.",
+        "outcome": "A small utility site I own and operate for design and dev workflows.",
+        "stack": ["Web"],
+        "links": {
+            "live": "https://placehold.cloud"
         },
         "featured": true
     }

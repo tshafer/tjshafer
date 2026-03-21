@@ -50,6 +50,32 @@
                 <p>
                     I build software and like hard problems. This domain is my home on the web for projects, experiments, and staying in touch with people in tech.
                 </p>
+                @if (($social['employer'] ?? null) || ! empty($social['maintains']) || ! empty($social['sites_built']))
+                    <div class="space-y-3 text-muted">
+                        @if ($social['employer'] ?? null)
+                            <p>
+                                I currently work at
+                                <a href="{{ $social['employer']['url'] }}" rel="noopener" class="text-copper hover:text-copper-hover underline decoration-copper/35 underline-offset-4">{{ $social['employer']['name'] }}</a>.
+                            </p>
+                        @endif
+                        @if (! empty($social['maintains']))
+                            <p>
+                                I maintain
+                                @foreach ($social['maintains'] as $m)
+                                    <a href="{{ $m['url'] }}" rel="noopener" class="text-copper hover:text-copper-hover underline decoration-copper/35 underline-offset-4">{{ $m['name'] }}</a>@if (! $loop->last), @endif
+                                @endforeach.
+                            </p>
+                        @endif
+                        @if (! empty($social['sites_built']))
+                            <p>
+                                Sites I've built include
+                                @foreach ($social['sites_built'] as $s)
+                                    <a href="{{ $s['url'] }}" rel="noopener" class="text-copper hover:text-copper-hover underline decoration-copper/35 underline-offset-4">{{ $s['name'] }}</a>@if (! $loop->last) and @endif
+                                @endforeach.
+                            </p>
+                        @endif
+                    </div>
+                @endif
                 <p>
                     If you're curious about work under the LLC, want to collaborate, or just want to say hello, reach out — I read every message.
                 </p>
@@ -97,12 +123,12 @@
             </div>
         </section>
 
-        @if (($github ?? null) || ! empty($social['testimonials']) || ! empty($social['trusted_by']))
+        @if (($github ?? null) || ! empty($social['testimonials']) || ! empty($social['trusted_by']) || ! empty($social['sites_built']) || ! empty($social['maintains']) || ($social['employer'] ?? null))
             <section class="mb-24 lg:mb-32" aria-label="Social proof">
                 <h2 class="font-display text-3xl sm:text-4xl mb-10 text-warm tracking-tight">
                     Out there
                 </h2>
-                <div class="grid gap-8 lg:grid-cols-2">
+                <div class="grid gap-8 @if ($github ?? null) lg:grid-cols-2 @endif">
                     @if ($github ?? null)
                         <div class="bg-panel border border-white/10 rounded-sm p-6">
                             <h3 class="text-sm font-mono uppercase tracking-wider text-copper mb-4">GitHub</h3>
@@ -123,6 +149,38 @@
                         </div>
                     @endif
                     <div class="space-y-6">
+                        @if ($social['employer'] ?? null)
+                            <div class="bg-panel border border-white/10 rounded-sm p-6">
+                                <h3 class="text-sm font-mono uppercase tracking-wider text-copper mb-3">Day job</h3>
+                                <p class="text-sm text-muted">
+                                    <a href="{{ $social['employer']['url'] }}" rel="noopener" class="text-warm hover:text-copper transition-colors font-medium">{{ $social['employer']['name'] }}</a>
+                                </p>
+                            </div>
+                        @endif
+                        @if (! empty($social['maintains']))
+                            <div class="bg-panel border border-white/10 rounded-sm p-6">
+                                <h3 class="text-sm font-mono uppercase tracking-wider text-copper mb-3">I maintain</h3>
+                                <ul class="text-sm text-muted space-y-2 list-none pl-0">
+                                    @foreach ($social['maintains'] as $m)
+                                        <li>
+                                            <a href="{{ $m['url'] }}" rel="noopener" class="text-warm hover:text-copper transition-colors">{{ $m['name'] }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @if (! empty($social['sites_built']))
+                            <div class="bg-panel border border-white/10 rounded-sm p-6">
+                                <h3 class="text-sm font-mono uppercase tracking-wider text-copper mb-3">Sites I built</h3>
+                                <ul class="text-sm text-muted space-y-2 list-none pl-0">
+                                    @foreach ($social['sites_built'] as $s)
+                                        <li>
+                                            <a href="{{ $s['url'] }}" rel="noopener" class="text-warm hover:text-copper transition-colors">{{ $s['name'] }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         @if (! empty($social['trusted_by']))
                             <div class="bg-panel border border-white/10 rounded-sm p-6">
                                 <h3 class="text-sm font-mono uppercase tracking-wider text-copper mb-3">Trusted by</h3>

@@ -17,6 +17,7 @@ return [
     /*
     | Secret path segment for /feed/inbox/{token} — contacts + bookings as RSS.
     | Generate: php -r "echo bin2hex(random_bytes(32));"
+    | (Controller trims this and the URL segment so .env whitespace cannot break auth.)
     */
     'inbox_feed_token' => env('SITE_INBOX_FEED_TOKEN'),
 

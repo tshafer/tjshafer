@@ -59,5 +59,7 @@ class PrivateInboxFeedTest extends TestCase
         $response->assertSee('<rss version="2.0"', false);
         $response->assertSee('Contact · Alex', false);
         $response->assertSee('Booking · Pat', false);
+        $response->assertSee('#contact-', false);
+        $response->assertSee('#booking-', false);
     }
 }

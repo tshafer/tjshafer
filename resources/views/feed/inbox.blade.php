@@ -5,11 +5,13 @@
         <link>{{ $siteUrl }}/</link>
         <description>Contact form submissions and booking requests (do not share this feed URL).</description>
         <language>en-us</language>
+        <lastBuildDate>{{ $lastBuildDate }}</lastBuildDate>
         <atom:link href="{{ $feedUrl }}" rel="self" type="application/rss+xml"/>
         @foreach ($items as $item)
             <item>
                 <title>{{ e($item['title']) }}</title>
-                <link>{{ $siteUrl }}/</link>
+                {{-- Unique link per item: many readers treat duplicate &lt;link&gt; as one story --}}
+                <link>{{ $siteUrl }}/#{{ e($item['guid']) }}</link>
                 <guid isPermaLink="false">{{ e($item['guid']) }}</guid>
                 <pubDate>{{ $item['pubDate'] }}</pubDate>
                 <description>{{ e($item['description']) }}</description>

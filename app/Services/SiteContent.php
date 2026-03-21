@@ -132,20 +132,39 @@ class SiteContent
     }
 
     /**
-     * @return array{testimonials: array<int, array<string, string>>, trusted_by: array<int, string>}
+     * @return array{
+     *     testimonials: array<int, array<string, string>>,
+     *     trusted_by: array<int, string>,
+     *     sites_built: array<int, array{name: string, url: string}>,
+     *     maintains: array<int, array{name: string, url: string}>,
+     *     employer: array{name: string, url: string}|null
+     * }
      */
     public function social(): array
     {
         $path = $this->contentPath('social.json');
         if (! File::exists($path)) {
-            return ['testimonials' => [], 'trusted_by' => []];
+            return [
+                'testimonials' => [],
+                'trusted_by' => [],
+                'sites_built' => [],
+                'maintains' => [],
+                'employer' => null,
+            ];
         }
 
         $data = json_decode(File::get($path), true) ?? [];
+        $employer = $data['employer'] ?? null;
+        if (! is_array($employer) || empty($employer['name']) || empty($employer['url'])) {
+            $employer = null;
+        }
 
         return [
             'testimonials' => $data['testimonials'] ?? [],
             'trusted_by' => $data['trusted_by'] ?? [],
+            'sites_built' => $data['sites_built'] ?? [],
+            'maintains' => $data['maintains'] ?? [],
+            'employer' => $employer,
         ];
     }
 }

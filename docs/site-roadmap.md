@@ -14,7 +14,7 @@ These ten areas are **implemented** on tjshafer.com (starter content — customi
 | 7 | **Booking** | `/booking` · first-party slots + `bookings` table · email includes `.ics` · admin `/admin/booking` (Laravel auth, `users.is_admin`, `booking:create-admin`) · `docs/booking-setup.md` |
 | 8 | **Résumé + JSON Resume** | `/resume` · `public/resume.json` · optional `public/resume.pdf` |
 | 9 | **Now page** | `/now` · `content/now.md` |
-| 10 | **Social proof** | Home “Out there” · GitHub API (`SITE_GITHUB_USERNAME`, optional `SITE_GITHUB_TOKEN`, cached 1h) · `docs/github-setup.md` · `content/social.json` (`testimonials`, `trusted_by`) |
+| 10 | **Social proof** | Home “Out there” + About · GitHub API · `content/social.json` (`testimonials`, `trusted_by`, `sites_built`, `maintains`, `employer`) |
 
 ### Env (`/.env`)
 

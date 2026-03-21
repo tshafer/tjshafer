@@ -34,3 +34,19 @@ Merges **contact form** messages (stored in `contact_messages`) and **booking** 
 ## Privacy
 
 Anyone with the URL can read message content. Rotate the token in `.env` if it leaks, then update your reader subscription.
+
+## Troubleshooting
+
+- **Nothing new after a booking or contact**  
+  - Remove the feed in your reader and subscribe again (many apps cache aggressively).  
+  - Open the feed URL in a browser — you should see `<item>` entries with titles like `Booking · …` or `Contact · …`.  
+  - Confirm the row exists: booking admin at `/admin/booking`, or check `bookings` / `contact_messages` in the database.
+
+- **Duplicate `<link>`**  
+  Each item uses a unique URL fragment (`/#booking-123`) so readers do not collapse everything into a single story.
+
+- **Token / 404**  
+  After changing `.env`, run `php artisan config:clear` if you use `config:cache`. Avoid stray spaces around `SITE_INBOX_FEED_TOKEN`.
+
+- **Honeypot**  
+  If the hidden `website` field on the booking form is filled (some extensions/autofill), the site fakes success but **does not** save a booking — nothing will appear in the feed.

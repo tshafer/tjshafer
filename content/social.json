@@ -1,4 +1,15 @@
 {
     "testimonials": [],
-    "trusted_by": []
+    "trusted_by": [],
+    "sites_built": [
+        { "name": "placehold.cloud", "url": "https://placehold.cloud" },
+        { "name": "shafer.llc", "url": "https://shafer.llc" }
+    ],
+    "maintains": [
+        { "name": "Washingtonian", "url": "https://www.washingtonian.com" }
+    ],
+    "employer": {
+        "name": "FiscalNote",
+        "url": "https://fiscalnote.com"
+    }
 }

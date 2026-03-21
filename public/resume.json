@@ -5,7 +5,7 @@
     "label": "Web developer",
     "email": "tj@tjshafer.com",
     "url": "https://tjshafer.com",
-    "summary": "Software developer based in Arizona. Work is conducted under Shafer LLC.",
+    "summary": "Software developer based in Arizona. Work is conducted under Shafer LLC. Currently at FiscalNote; maintains Washingtonian.com; built placehold.cloud and shafer.llc.",
     "location": {
       "city": "Arizona",
       "countryCode": "US"
@@ -20,12 +20,27 @@
   },
   "work": [
     {
+      "name": "FiscalNote",
+      "position": "Engineer",
+      "url": "https://fiscalnote.com",
+      "startDate": "2023-01",
+      "summary": "Software engineering."
+    },
+    {
+      "name": "Washingtonian",
+      "position": "Site maintenance / engineering",
+      "url": "https://www.washingtonian.com",
+      "startDate": "2020-01",
+      "summary": "Ongoing maintenance and engineering for the publication's web presence."
+    },
+    {
       "name": "Shafer LLC",
       "position": "Owner / Developer",
+      "url": "https://shafer.llc",
       "startDate": "2020-01",
       "summary": "Consulting, product work, and client engineering under the LLC.",
       "highlights": [
-        "Replace with shipped outcomes, clients, or product names you can share."
+        "Built and operate placehold.cloud and shafer.llc."
       ]
     }
   ],
@@ -37,6 +52,6 @@
   ],
   "meta": {
     "version": "1.0.0",
-    "lastModified": "2025-03-21"
+    "lastModified": "2026-03-21"
   }
 }

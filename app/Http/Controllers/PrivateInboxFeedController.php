@@ -12,8 +12,10 @@ class PrivateInboxFeedController extends Controller
     public function __invoke(string $token): Response
     {
         $expected = config('site.inbox_feed_token');
+        $expected = is_string($expected) ? trim($expected) : '';
+        $token = trim($token);
 
-        if (! is_string($expected) || $expected === '' || ! hash_equals($expected, $token)) {
+        if ($expected === '' || ! hash_equals($expected, $token)) {
             abort(404);
         }
 
@@ -22,15 +24,18 @@ class PrivateInboxFeedController extends Controller
         $tz = config('booking.timezone', 'America/Phoenix');
 
         $items = $this->collectItems($tz);
+        $lastBuildDate = $items->isNotEmpty() ? $items->first()['pubDate'] : now('UTC')->format('r');
 
         return response()
             ->view('feed.inbox', [
                 'siteUrl' => $siteUrl,
                 'feedUrl' => $feedUrl,
                 'items' => $items,
+                'lastBuildDate' => $lastBuildDate,
             ])
             ->header('Content-Type', 'application/rss+xml; charset=UTF-8')
-            ->header('X-Robots-Tag', 'noindex, nofollow, noarchive');
+            ->header('X-Robots-Tag', 'noindex, nofollow, noarchive')
+            ->header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     }
 
     /**
