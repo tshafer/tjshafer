@@ -14,4 +14,10 @@ return [
 
     'app_url' => env('APP_URL', 'http://localhost'),
 
+    /*
+    | Secret path segment for /feed/inbox/{token} — contacts + bookings as RSS.
+    | Generate: php -r "echo bin2hex(random_bytes(32));"
+    */
+    'inbox_feed_token' => env('SITE_INBOX_FEED_TOKEN'),
+
 ];

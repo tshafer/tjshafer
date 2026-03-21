@@ -7,6 +7,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PrivateInboxFeedController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SitePageController;
 use App\Http\Controllers\SpotifyController;
@@ -59,6 +60,11 @@ Route::post('/contact', [ContactController::class, 'store'])
     ->name('contact.store');
 
 Route::get('/feed.xml', FeedController::class)->name('feed');
+
+Route::get('/feed/inbox/{token}', PrivateInboxFeedController::class)
+    ->middleware('throttle:120,1')
+    ->where('token', '[A-Za-z0-9_-]{32,128}')
+    ->name('feed.inbox');
 
 Route::get('/spotify/auth', [SpotifyController::class, 'authorize'])->name('spotify.authorize');
 Route::get('/spotify/callback', [SpotifyController::class, 'callback'])->name('spotify.callback');

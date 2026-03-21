@@ -9,7 +9,8 @@ These ten areas are **implemented** on tjshafer.com (starter content — customi
 | 3 | **Uses** | `/uses` · edit `resources/views/pages/uses.blade.php` |
 | 4 | **Speaking & media** | *Disabled for now* — uncomment `routes/web.php` + `nav` `$more` entry · `content/speaking.json` |
 | 5 | **Colophon** | `/colophon` · analytics disclosure: own stack at observe.dply.io |
-| 6 | **Contact form + honeypot** | `/contact` POST · hidden `website` field · `throttle:8,1` · mails `SITE_CONTACT_EMAIL` |
+| 6 | **Contact form + honeypot** | `/contact` POST · hidden `website` field · `throttle:8,1` · mails `SITE_CONTACT_EMAIL` · rows in `contact_messages` |
+| 6b | **Private inbox RSS** | `/feed/inbox/{token}` · `SITE_INBOX_FEED_TOKEN` · contacts + bookings · **[`docs/inbox-feed.md`](inbox-feed.md)** |
 | 7 | **Booking** | `/booking` · first-party slots + `bookings` table · email includes `.ics` · admin `/admin/booking` (Laravel auth, `users.is_admin`, `booking:create-admin`) · `docs/booking-setup.md` |
 | 8 | **Résumé + JSON Resume** | `/resume` · `public/resume.json` · optional `public/resume.pdf` |
 | 9 | **Now page** | `/now` · `content/now.md` |
@@ -22,6 +23,7 @@ SITE_CONTACT_EMAIL=tj@tjshafer.com
 SITE_GITHUB_USERNAME=tomshafer
 # Optional: SITE_GITHUB_TOKEN=
 # Booking: BOOKING_* · admin user: php artisan booking:create-admin … (see docs/booking-setup.md)
+# SITE_INBOX_FEED_TOKEN= (see docs/inbox-feed.md)
 ```
 
 ### Logo

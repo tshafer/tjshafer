@@ -51,5 +51,9 @@ class ExampleTest extends TestCase
 
         $response->assertRedirect(route('contact'));
         $response->assertSessionHas('status');
+
+        $this->assertDatabaseHas('contact_messages', [
+            'email' => 'test@example.com',
+        ]);
     }
 }
