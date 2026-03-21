@@ -25,7 +25,7 @@
             </section>
             <section>
                 <h2 class="font-display text-2xl text-warm mb-3">Analytics &amp; privacy</h2>
-                <p class="text-sm">Default setup has no third-party analytics. If you add Plausible, Fathom, or similar, document it here so visitors know.</p>
+                <p class="text-sm">This site does not use mainstream third-party analytics (for example Google Analytics). Traffic is measured with <strong class="text-warm">our own setup</strong> on <a href="https://observe.dply.io" rel="noopener noreferrer" class="text-copper hover:text-copper-hover">observe.dply.io</a> — privacy-oriented page views and referrers, no ad tracking or cross-site profiles.</p>
             </section>
         </div>
     </div>

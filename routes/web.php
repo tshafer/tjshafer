@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminBookingAuthController;
+use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
@@ -30,6 +32,25 @@ Route::get('/booking', [BookingController::class, 'create'])->name('booking');
 Route::post('/booking', [BookingController::class, 'store'])
     ->middleware('throttle:10,1')
     ->name('booking.store');
+
+Route::middleware('guest')->prefix('admin/booking')->group(function () {
+    Route::get('login', [AdminBookingAuthController::class, 'showLogin'])->name('admin.bookings.login');
+    Route::post('login', [AdminBookingAuthController::class, 'login'])
+        ->middleware('throttle:10,1')
+        ->name('admin.bookings.login.store');
+});
+
+Route::middleware(['auth', 'can:manage-bookings'])->prefix('admin/booking')->group(function () {
+    Route::get('/', [AdminBookingController::class, 'index'])->name('admin.bookings.index');
+    Route::post('logout', [AdminBookingAuthController::class, 'logout'])->name('admin.bookings.logout');
+    Route::post('{booking}/confirm', [AdminBookingController::class, 'confirm'])
+        ->whereNumber('booking')
+        ->name('admin.bookings.confirm');
+    Route::post('{booking}/cancel', [AdminBookingController::class, 'cancel'])
+        ->whereNumber('booking')
+        ->name('admin.bookings.cancel');
+});
+
 Route::get('/resume', [SitePageController::class, 'resume'])->name('resume');
 
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');

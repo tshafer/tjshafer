@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingRequestNotification;
 use App\Models\Booking;
 use App\Services\BookingSlotService;
 use Carbon\Carbon;
@@ -48,7 +49,7 @@ class BookingController extends Controller
                 ->withErrors(['slot' => 'That time is no longer available. Pick another slot.']);
         }
 
-        $booked = DB::transaction(function () use ($validated, $startUtc, $endUtc) {
+        $booking = DB::transaction(function () use ($validated, $startUtc, $endUtc) {
             $overlap = Booking::query()
                 ->blocking()
                 ->where('starts_at', '<', $endUtc)
@@ -57,10 +58,10 @@ class BookingController extends Controller
                 ->exists();
 
             if ($overlap) {
-                return false;
+                return null;
             }
 
-            Booking::query()->create([
+            return Booking::query()->create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'message' => $validated['message'] ?? null,
@@ -69,11 +70,9 @@ class BookingController extends Controller
                 'timezone' => 'UTC',
                 'status' => 'pending',
             ]);
-
-            return true;
         });
 
-        if (! $booked) {
+        if ($booking === null) {
             return redirect()->route('booking')
                 ->withInput($request->except('booking_slot'))
                 ->withErrors(['slot' => 'That time was just taken. Pick another slot.']);
@@ -90,11 +89,7 @@ class BookingController extends Controller
             "When: {$localStart} – {$localEnd}\n".
             (filled($validated['message'] ?? null) ? "\nNotes:\n{$validated['message']}\n" : '');
 
-        Mail::raw($body, function ($message) use ($validated, $to, $localStart) {
-            $message->to($to)
-                ->replyTo($validated['email'], $validated['name'])
-                ->subject('Booking request: '.$localStart);
-        });
+        Mail::to($to)->send(new BookingRequestNotification($booking, $body));
 
         return redirect()->route('booking')->with('status', 'Request sent — check your email for next steps. I will confirm shortly.');
     }

@@ -8,9 +8,9 @@ These ten areas are **implemented** on tjshafer.com (starter content — customi
 | 2 | **Writing + RSS** | `/writing`, `/writing/{slug}` · `content/posts/*.md` · `/feed.xml` |
 | 3 | **Uses** | `/uses` · edit `resources/views/pages/uses.blade.php` |
 | 4 | **Speaking & media** | *Disabled for now* — uncomment `routes/web.php` + `nav` `$more` entry · `content/speaking.json` |
-| 5 | **Colophon** | `/colophon` |
+| 5 | **Colophon** | `/colophon` · analytics disclosure: own stack at observe.dply.io |
 | 6 | **Contact form + honeypot** | `/contact` POST · hidden `website` field · `throttle:8,1` · mails `SITE_CONTACT_EMAIL` |
-| 7 | **Booking** | `/booking` · first-party slots + `bookings` table · see `docs/booking-setup.md` |
+| 7 | **Booking** | `/booking` · first-party slots + `bookings` table · email includes `.ics` · admin `/admin/booking` (Laravel auth, `users.is_admin`, `booking:create-admin`) · `docs/booking-setup.md` |
 | 8 | **Résumé + JSON Resume** | `/resume` · `public/resume.json` · optional `public/resume.pdf` |
 | 9 | **Now page** | `/now` · `content/now.md` |
 | 10 | **Social proof** | Home “Out there” · GitHub API (`SITE_GITHUB_USERNAME`, optional `SITE_GITHUB_TOKEN`, cached 1h) · `docs/github-setup.md` · `content/social.json` (`testimonials`, `trusted_by`) |
@@ -21,7 +21,7 @@ These ten areas are **implemented** on tjshafer.com (starter content — customi
 SITE_CONTACT_EMAIL=tj@tjshafer.com
 SITE_GITHUB_USERNAME=tomshafer
 # Optional: SITE_GITHUB_TOKEN=
-# Booking: BOOKING_* (see docs/booking-setup.md)
+# Booking: BOOKING_* · admin user: php artisan booking:create-admin … (see docs/booking-setup.md)
 ```
 
 ### Logo
