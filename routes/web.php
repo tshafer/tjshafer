@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HomeController;
@@ -22,9 +23,13 @@ Route::get('/writing/{slug}', [BlogController::class, 'show'])->name('writing.sh
 
 Route::get('/now', [SitePageController::class, 'now'])->name('now');
 Route::get('/uses', [SitePageController::class, 'uses'])->name('uses');
+// Speaking (disabled): restore route + nav/footer links when ready.
 // Route::get('/speaking', [SitePageController::class, 'speaking'])->name('speaking');
 Route::get('/colophon', [SitePageController::class, 'colophon'])->name('colophon');
-Route::get('/booking', [SitePageController::class, 'booking'])->name('booking');
+Route::get('/booking', [BookingController::class, 'create'])->name('booking');
+Route::post('/booking', [BookingController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('booking.store');
 Route::get('/resume', [SitePageController::class, 'resume'])->name('resume');
 
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');

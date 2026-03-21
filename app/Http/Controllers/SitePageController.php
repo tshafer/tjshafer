@@ -25,13 +25,6 @@ class SitePageController extends Controller
         return view('pages.colophon');
     }
 
-    public function booking(): View
-    {
-        return view('pages.booking', [
-            'embedUrl' => config('site.booking_embed_url'),
-        ]);
-    }
-
     public function resume(): View
     {
         $path = public_path('resume.json');

@@ -6,7 +6,11 @@ return [
 
     'github_username' => env('SITE_GITHUB_USERNAME', 'tomshafer'),
 
-    'booking_embed_url' => env('SITE_BOOKING_EMBED_URL', ''),
+    /*
+    | Optional fine-grained token (classic PAT or fine-grained with read:user).
+    | Raises GitHub API limit from 60/hr to 5,000/hr — useful if traffic grows.
+    */
+    'github_token' => env('SITE_GITHUB_TOKEN'),
 
     'app_url' => env('APP_URL', 'http://localhost'),
 
