@@ -3,7 +3,7 @@
     <channel>
         <title>{{ e(config('app.name', 'Site')) }} — private inbox</title>
         <link>{{ $siteUrl }}/</link>
-        <description>Contact form submissions and booking requests (do not share this feed URL).</description>
+        <description>Contact form submissions (do not share this feed URL).</description>
         <language>en-us</language>
         <lastBuildDate>{{ $lastBuildDate }}</lastBuildDate>
         <atom:link href="{{ $feedUrl }}" rel="self" type="application/rss+xml"/>

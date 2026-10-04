@@ -9,5 +9,5 @@
 - Public branding uses Shafer LLC; primary contact email on the site is tj@tjshafer.com.
 - The speaking feature is disabled for now (routes and nav commented) until it is turned back on.
 - Colophon states analytics are not mainstream third-party tools; measurement uses an own setup at observe.dply.io.
-- First-party booking is at `/booking`; admin is `/admin/booking` with Laravel session auth and `users.is_admin` (bootstrap admins with `php artisan booking:create-admin`).
+- Booking (`/booking`, `/admin/booking`) was removed; the `bookings` table and `users.is_admin` column remain in the database.
 - Spotify listening UI lives on `/music`, separate from the home page.

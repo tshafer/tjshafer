@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Booking;
 use App\Models\ContactMessage;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -31,7 +29,7 @@ class PrivateInboxFeedTest extends TestCase
         $this->get('/feed/inbox/'.$this->token())->assertNotFound();
     }
 
-    public function test_inbox_feed_returns_rss_with_contact_and_booking(): void
+    public function test_inbox_feed_returns_rss_with_contact(): void
     {
         config(['site.inbox_feed_token' => $this->token()]);
 
@@ -41,16 +39,6 @@ class PrivateInboxFeedTest extends TestCase
             'message' => 'Hello',
         ]);
 
-        Booking::query()->create([
-            'name' => 'Pat',
-            'email' => 'pat@example.com',
-            'message' => null,
-            'starts_at' => Carbon::parse('2025-06-01 15:00:00', 'UTC'),
-            'ends_at' => Carbon::parse('2025-06-01 15:30:00', 'UTC'),
-            'timezone' => 'UTC',
-            'status' => 'pending',
-        ]);
-
         $response = $this->get('/feed/inbox/'.$this->token());
 
         $response->assertOk();
@@ -58,9 +46,7 @@ class PrivateInboxFeedTest extends TestCase
         $response->assertHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
         $response->assertSee('<rss version="2.0"', false);
         $response->assertSee('Contact · Alex', false);
-        $response->assertSee('Booking · Pat', false);
         $response->assertSee('inbox=contact-', false);
-        $response->assertSee('inbox=booking-', false);
     }
 
     public function test_inbox_feed_uses_app_url_for_atom_self_when_host_is_public(): void

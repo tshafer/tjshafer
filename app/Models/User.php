@@ -48,9 +48,4 @@ class User extends Authenticatable
             'is_admin' => 'boolean',
         ];
     }
-
-    public function canManageBookings(): bool
-    {
-        return $this->is_admin === true;
-    }
 }

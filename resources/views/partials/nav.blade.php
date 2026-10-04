@@ -10,7 +10,6 @@
     $more = [
         ['route' => 'uses', 'label' => 'Uses'],
         // ['route' => 'speaking', 'label' => 'Speaking'], // uncomment + restore /speaking route
-        ['route' => 'booking', 'label' => 'Book'],
         ['route' => 'resume', 'label' => 'Résumé'],
         ['route' => 'colophon', 'label' => 'Colophon'],
     ];

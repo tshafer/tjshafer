@@ -27,7 +27,6 @@ class ExampleTest extends TestCase
             '/now',
             '/uses',
             '/colophon',
-            '/booking',
             '/resume',
             '/contact',
             '/feed.xml',

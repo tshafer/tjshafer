@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
 use App\Models\ContactMessage;
 use DateTimeInterface;
 use Illuminate\Http\Request;
@@ -30,9 +29,8 @@ class PrivateInboxFeedController extends Controller
          */
         $siteUrl = $this->publicBaseUrl($request);
         $feedUrl = $siteUrl.'/feed/inbox/'.$token;
-        $tz = config('booking.timezone', 'America/Phoenix');
 
-        $items = $this->collectItems($tz);
+        $items = $this->collectItems();
         $lastBuildDate = $items->isNotEmpty()
             ? $items->first()['pubDate']
             : now('UTC')->format(DateTimeInterface::RSS);
@@ -66,28 +64,9 @@ class PrivateInboxFeedController extends Controller
     /**
      * @return Collection<int, array{guid: string, title: string, pubDate: string, description: string}>
      */
-    private function collectItems(string $tz): Collection
+    private function collectItems(): Collection
     {
         $rows = collect();
-
-        foreach (Booking::query()->latest('created_at')->limit(100)->cursor() as $booking) {
-            $start = $booking->starts_at->copy()->timezone($tz);
-            $end = $booking->ends_at->copy()->timezone($tz);
-            $when = $start->format('l, M j, Y g:i A').' – '.$end->format('g:i A T');
-
-            $body = "Status: {$booking->status}\nEmail: {$booking->email}\nWhen: {$when}\n";
-            if (filled($booking->message)) {
-                $body .= "\nNotes:\n".$booking->message;
-            }
-
-            $rows->push([
-                'sort' => $booking->created_at->timestamp,
-                'guid' => 'booking-'.$booking->getKey(),
-                'title' => 'Booking · '.$booking->name.' ('.$booking->status.')',
-                'pubDate' => $booking->created_at->clone()->utc()->format(DateTimeInterface::RSS),
-                'description' => $body,
-            ]);
-        }
 
         foreach (ContactMessage::query()->latest('created_at')->limit(100)->cursor() as $msg) {
             $body = "Email: {$msg->email}\n\n".$msg->message;

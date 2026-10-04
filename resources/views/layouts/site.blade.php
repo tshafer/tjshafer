@@ -59,7 +59,6 @@
                     <a href="{{ route('writing.index') }}" class="hover:text-copper transition-colors">Writing</a>
                     <a href="{{ route('now') }}" class="hover:text-copper transition-colors">Now</a>
                     <a href="{{ route('uses') }}" class="hover:text-copper transition-colors">Uses</a>
-                    <a href="{{ route('booking') }}" class="hover:text-copper transition-colors">Book</a>
                     <a href="{{ route('resume') }}" class="hover:text-copper transition-colors">Résumé</a>
                     <a href="{{ route('colophon') }}" class="hover:text-copper transition-colors">Colophon</a>
                     <a href="{{ route('feed') }}" class="hover:text-copper transition-colors">RSS</a>

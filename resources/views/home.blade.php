@@ -20,7 +20,6 @@
                     <a href="{{ route('music') }}" class="text-[#8fbf8f] hover:text-copper">music/</a>
                     <a href="{{ route('uses') }}" class="hover:text-copper">uses.md</a>
                     <a href="{{ route('resume') }}" class="hover:text-copper">resume</a>
-                    <a href="{{ route('booking') }}" class="hover:text-copper">book</a>
                     <a href="{{ route('contact') }}" class="hover:text-copper">contact</a>
                 </nav>
                 <p><span class="text-copper">tj@shafer.llc</span><span class="text-muted">:~$</span> <span class="inline-block w-2.5 h-5 align-middle bg-copper motion-safe:animate-[cursor-blink_1.1s_steps(1)_infinite]" aria-hidden="true"></span></p>
