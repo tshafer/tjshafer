@@ -44,6 +44,51 @@
     }
 }
 
+@keyframes cursor-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Themes: utilities read these vars, so each theme just redefines them. Set via the `theme` cookie. */
+[data-theme='terminal'] {
+    --font-sans: 'IBM Plex Mono', ui-monospace, monospace;
+    --font-display: 'IBM Plex Mono', ui-monospace, monospace;
+    --color-ink: #0c0d0c;
+    --color-panel: #121412;
+    --color-panel-2: #181b18;
+    --color-panel-3: #20241f;
+    --color-warm: #d6dccf;
+    --color-muted: #7d8678;
+    --color-copper: #e0a458;
+    --color-copper-hover: #f0b86c;
+}
+
+/* Light theme: --color-white flips to dark brown so the many border-white/10 hairlines stay visible. */
+[data-theme='desert'] {
+    --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+    --color-ink: #efe2cf;
+    --color-panel: #f6ecdd;
+    --color-panel-2: #e8d8c0;
+    --color-panel-3: #dfcaab;
+    --color-warm: #3a2a1d;
+    --color-muted: #6e5846;
+    --color-copper: #9c4a28;
+    --color-copper-hover: #b9603a;
+    --color-spotify: #148a3e;
+    --color-white: #3a2a1d;
+    color-scheme: light;
+}
+
+[data-theme='terminal'] {
+    color-scheme: dark;
+}
+
+[data-theme='desert'] .font-display {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
 @layer base {
     html {
         scroll-behavior: smooth;

@@ -3,39 +3,58 @@
 @section('title', 'Tom Shafer · Shafer LLC')
 
 @section('content')
-    <section class="relative overflow-hidden border-b border-white/10">
-        <div class="absolute inset-0 bg-gradient-to-br from-copper/10 via-transparent to-transparent pointer-events-none"></div>
-        <div class="absolute top-0 right-0 w-[min(55vw,28rem)] h-full border-l border-copper/20 pointer-events-none hidden lg:block animate-shimmer opacity-40"></div>
-        <div class="max-w-6xl mx-auto px-5 sm:px-8 pt-14 pb-20 lg:pt-20 lg:pb-28 relative">
-            <div class="max-w-4xl opacity-0 animate-[rise-fade_0.85s_cubic-bezier(0.22,1,0.36,1)_forwards]">
-                <div class="flex flex-col sm:flex-row gap-10 sm:gap-12 items-start mb-10">
-                    <img src="{{ asset('images/tom-shafer-logo.png') }}" alt="Tom Shafer — web developer" width="176" height="176" class="w-36 h-36 sm:w-44 sm:h-44 rounded-full object-cover ring-2 ring-copper/40 shadow-xl shrink-0 mx-auto sm:mx-0">
-                    <div class="flex-1 min-w-0 text-center sm:text-left">
-                        <p class="font-mono text-copper text-xs sm:text-sm tracking-[0.35em] uppercase mb-6">Operated by Tom Shafer</p>
-                        <h1 class="font-display text-warm text-[clamp(2.75rem,10vw,6.5rem)] leading-[0.92] tracking-tight mb-8">
-                            shafer<span class="text-copper">.</span>llc
-                        </h1>
-                    </div>
+    @if ($theme === 'terminal')
+    <section class="border-b border-white/10">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8 pt-14 pb-20 lg:pt-20 lg:pb-24">
+            <div class="max-w-3xl rounded-sm border border-white/10 bg-panel p-6 sm:p-8 text-sm sm:text-base leading-relaxed">
+                <div class="flex gap-2 mb-6" aria-hidden="true">
+                    <span class="w-3 h-3 rounded-full bg-panel-3"></span><span class="w-3 h-3 rounded-full bg-panel-3"></span><span class="w-3 h-3 rounded-full bg-panel-3"></span>
                 </div>
-                <p class="text-balance text-lg sm:text-xl text-muted max-w-xl mb-10 leading-relaxed font-normal">
-                    This site and related work are held under <strong class="text-warm font-semibold">Shafer LLC</strong> — a small Arizona company for software, consulting, and creative projects.
-                </p>
-                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-4">
-                    <a href="https://shafer.llc" rel="noopener" class="inline-flex items-center gap-2 rounded-sm bg-copper px-5 py-3 text-sm font-semibold text-ink hover:bg-copper-hover transition-colors">
-                        Visit shafer.llc
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                    </a>
-                    <span class="inline-flex items-center gap-2 text-sm text-muted">
-                        <svg class="w-4 h-4 text-copper shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
-                        Arizona, United States
-                    </span>
-                </div>
+                <p><span class="text-copper">tj@shafer.llc</span><span class="text-muted">:~$</span> whoami</p>
+                <h1 class="text-warm mb-4">Tom Shafer. Software under Shafer LLC. Arizona.</h1>
+                <p><span class="text-copper">tj@shafer.llc</span><span class="text-muted">:~$</span> ls</p>
+                <nav class="flex flex-wrap gap-x-6 gap-y-1 mb-4" aria-label="Sections">
+                    <a href="{{ route('projects.index') }}" class="text-[#8fbf8f] hover:text-copper">projects/</a>
+                    <a href="{{ route('writing.index') }}" class="text-[#8fbf8f] hover:text-copper">writing/</a>
+                    <a href="{{ route('now') }}" class="hover:text-copper">now.md</a>
+                    <a href="{{ route('music') }}" class="text-[#8fbf8f] hover:text-copper">music/</a>
+                    <a href="{{ route('uses') }}" class="hover:text-copper">uses.md</a>
+                    <a href="{{ route('resume') }}" class="hover:text-copper">resume</a>
+                    <a href="{{ route('booking') }}" class="hover:text-copper">book</a>
+                    <a href="{{ route('contact') }}" class="hover:text-copper">contact</a>
+                </nav>
+                <p><span class="text-copper">tj@shafer.llc</span><span class="text-muted">:~$</span> <span class="inline-block w-2.5 h-5 align-middle bg-copper motion-safe:animate-[cursor-blink_1.1s_steps(1)_infinite]" aria-hidden="true"></span></p>
             </div>
         </div>
     </section>
+    @else
+    <section class="relative overflow-hidden border-b border-white/10 min-h-[30rem]">
+        <div class="absolute rounded-full bg-[#e0703a] w-[min(60vw,24rem)] aspect-square right-[6%] top-10" aria-hidden="true"></div>
+        <div class="absolute inset-x-0 bottom-0" aria-hidden="true">
+            <div class="h-8 bg-[#d9a066]"></div><div class="h-8 bg-[#b9603a]"></div><div class="h-8 bg-[#7c3d2a]"></div><div class="h-10 bg-[#3f4a3a]"></div>
+        </div>
+        <div class="relative max-w-6xl mx-auto px-5 sm:px-8 pt-14 pb-48">
+            <p class="font-mono text-xs uppercase tracking-[0.3em] mb-4">Shafer LLC · Arizona</p>
+            <h1 class="font-display text-[clamp(3.5rem,12vw,8rem)] leading-[0.88] mb-6">Tom<br>Shafer</h1>
+            <p class="text-lg max-w-md">Software, consulting, and creative projects.</p>
+        </div>
+        <p class="absolute inset-x-0 bottom-3 max-w-6xl mx-auto px-5 sm:px-8 font-mono text-xs uppercase tracking-[0.15em] text-[#efe2cf]">
+            <time id="az-clock">{{ now('America/Phoenix')->format('g:i a') }}</time> · MST · UTC−7 · no daylight saving
+        </p>
+    </section>
+    @push('scripts')
+        <script>
+            (() => {
+                const el = document.getElementById('az-clock');
+                const fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Phoenix', hour: 'numeric', minute: '2-digit' });
+                const tick = () => { el.textContent = fmt.format(new Date()).toLowerCase(); };
+                tick();
+                setInterval(tick, 30000);
+            })();
+        </script>
+    @endpush
+    @endif
+
 
     <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 lg:py-24">
         <section id="about" class="mb-24 lg:mb-32">

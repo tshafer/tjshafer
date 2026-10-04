@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 
+Route::get('/theme/{theme}', function (string $theme) {
+    return redirect()->back(fallback: route('home'))->withCookie(cookie()->forever('theme', $theme));
+})->whereIn('theme', ['terminal', 'desert'])->name('theme');
+
 Route::get('/music', function () {
     return view('music');
 })->name('music');

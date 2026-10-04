@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{ $theme }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" href="{{ asset('images/tom-shafer-logo.png') }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=ibm-plex-mono:400,500|italiana:400|jost:400,500,600,700" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=ibm-plex-mono:400,500|italiana:400|jost:400,500,600,700|bricolage-grotesque:400,800" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('head')
@@ -30,6 +30,8 @@
                     </a>
                     <div class="flex items-center gap-3 sm:gap-5 min-w-0">
                         <a href="https://shafer.llc" rel="noopener" class="font-mono text-xs uppercase tracking-wider text-copper hover:text-copper-hover transition-colors hidden md:inline shrink-0">shafer.llc</a>
+                        @php $otherTheme = $theme === 'desert' ? 'terminal' : 'desert'; @endphp
+                        <a href="{{ route('theme', $otherTheme) }}" rel="nofollow" class="font-mono text-xs uppercase tracking-wider text-muted hover:text-copper border border-white/15 rounded-sm px-2 py-1 transition-colors shrink-0" title="Switch theme">{{ ucfirst($otherTheme) }}</a>
                         @include('partials.nav')
                     </div>
                 </nav>
