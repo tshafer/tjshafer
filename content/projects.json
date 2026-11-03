@@ -2,7 +2,7 @@
     {
         "slug": "tjshafer-com",
         "title": "This site (tjshafer.com)",
-        "summary": "Personal site for Shafer LLC: Laravel, Tailwind, Spotify integration, RSS, and content in Markdown/JSON.",
+        "summary": "Personal site for Shafer LLC: Laravel, Tailwind, RSS, and content in Markdown/JSON.",
         "outcome": "Single deployable app that doubles as a portfolio shell and playground for small features.",
         "stack": ["Laravel 13", "PHP 8.5", "Tailwind CSS 4", "Vite"],
         "links": {

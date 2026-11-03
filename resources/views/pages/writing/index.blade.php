@@ -6,12 +6,7 @@
 
 @section('content')
     <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 lg:py-20">
-        <h1 class="font-display text-4xl sm:text-5xl text-warm tracking-tight mb-4">Writing</h1>
-        <p class="font-mono text-xs uppercase tracking-[0.25em] text-copper mb-6">Dev log</p>
-        <p class="text-sm text-muted mb-10">
-            <a href="{{ route('feed') }}" class="text-copper hover:text-copper-hover">RSS feed</a>
-            · Posts live in <code class="text-copper">content/posts/</code>
-        </p>
+        <h1 class="font-display text-4xl sm:text-5xl text-warm tracking-tight mb-10">Writing</h1>
 
         <ul class="space-y-4 max-w-2xl">
             @forelse ($posts as $post)

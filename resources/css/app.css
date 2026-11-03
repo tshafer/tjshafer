@@ -1,47 +1,19 @@
 @import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
-@source '../**/*.js';
 
 @theme {
-    --font-sans: 'Jost', ui-sans-serif, system-ui, sans-serif;
-    --font-display: 'Italiana', ui-serif, Georgia, serif;
+    --font-sans: 'IBM Plex Mono', ui-monospace, monospace;
+    --font-display: 'IBM Plex Mono', ui-monospace, monospace;
     --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
-    --color-ink: #080706;
-    --color-panel: #141210;
-    --color-panel-2: #1c1916;
-    --color-panel-3: #26221e;
-    --color-warm: #f2ebe3;
-    --color-muted: #9a948b;
-    --color-copper: #c27b35;
-    --color-copper-hover: #d9914a;
-    --color-spotify: #1ed760;
-
-    --animate-shimmer: edge-shimmer 8s ease-in-out infinite;
-}
-
-@keyframes rise-fade {
-    from {
-        opacity: 0;
-        transform: translateY(1.25rem);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes edge-shimmer {
-    0%,
-    100% {
-        opacity: 0.35;
-    }
-    50% {
-        opacity: 0.85;
-    }
+    --color-ink: #0c0d0c;
+    --color-panel: #121412;
+    --color-panel-2: #181b18;
+    --color-warm: #d6dccf;
+    --color-muted: #7d8678;
+    --color-copper: #e0a458;
+    --color-copper-hover: #f0b86c;
 }
 
 @keyframes cursor-blink {
@@ -50,74 +22,13 @@
     }
 }
 
-/* Themes: utilities read these vars, so each theme just redefines them. Set via the `theme` cookie. */
-[data-theme='terminal'] {
-    --font-sans: 'IBM Plex Mono', ui-monospace, monospace;
-    --font-display: 'IBM Plex Mono', ui-monospace, monospace;
-    --color-ink: #0c0d0c;
-    --color-panel: #121412;
-    --color-panel-2: #181b18;
-    --color-panel-3: #20241f;
-    --color-warm: #d6dccf;
-    --color-muted: #7d8678;
-    --color-copper: #e0a458;
-    --color-copper-hover: #f0b86c;
-}
-
-/* Light theme: --color-white flips to dark brown so the many border-white/10 hairlines stay visible. */
-[data-theme='desert'] {
-    --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
-    --color-ink: #efe2cf;
-    --color-panel: #f6ecdd;
-    --color-panel-2: #e8d8c0;
-    --color-panel-3: #dfcaab;
-    --color-warm: #3a2a1d;
-    --color-muted: #6e5846;
-    --color-copper: #9c4a28;
-    --color-copper-hover: #b9603a;
-    --color-spotify: #148a3e;
-    --color-white: #3a2a1d;
-    color-scheme: light;
-}
-
-[data-theme='terminal'] {
-    color-scheme: dark;
-}
-
-[data-theme='desert'] .font-display {
-    font-weight: 800;
-    letter-spacing: -0.02em;
-}
-
 @layer base {
     html {
-        scroll-behavior: smooth;
+        color-scheme: dark;
     }
 
     body {
         @apply bg-ink text-warm antialiased;
-    }
-
-    body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 0;
-        opacity: 0.035;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
-    ::selection {
-        @apply bg-copper/40 text-warm;
-    }
-
-    details summary {
-        list-style: none;
-    }
-
-    details summary::-webkit-details-marker {
-        display: none;
     }
 }
 

@@ -10,7 +10,6 @@ This post is a **starter dev log entry**. Edit or delete it in `content/posts/`.
 ### What lives where
 
 - **Writing** — Markdown files in `content/posts/` with YAML front matter (`title`, `slug`, `date`, `excerpt`).
-- **Now** — `content/now.md` for a /now-style update.
-- **Projects & speaking** — JSON in `content/projects.json` and `content/speaking.json`.
+- **Projects** — JSON in `content/projects.json`.
 
 RSS is at [`/feed.xml`](/feed.xml).
