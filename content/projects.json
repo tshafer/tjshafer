@@ -1,25 +1,27 @@
 [
     {
-        "slug": "tjshafer-com",
-        "title": "This site (tjshafer.com)",
-        "summary": "Personal site for Shafer LLC: Laravel, Tailwind, RSS, and content in Markdown/JSON.",
-        "outcome": "Single deployable app that doubles as a portfolio shell and playground for small features.",
-        "stack": ["Laravel 13", "PHP 8.5", "Tailwind CSS 4", "Vite"],
+        "slug": "ledge",
+        "title": "Ledge",
+        "summary": "Your MacBook notch, as a dashboard.",
         "links": {
-            "live": "https://tjshafer.com"
-        },
-        "featured": true
+            "live": "https://ledge.shafer.llc"
+        }
     },
     {
-        "slug": "shafer-llc-presence",
-        "title": "shafer.llc",
-        "summary": "Company site for Shafer LLC — brand, contact, and how to work together.",
-        "outcome": "Single place on the web for the Arizona LLC and its services.",
-        "stack": ["Web", "Design system"],
+        "slug": "binnacle",
+        "title": "Binnacle",
+        "summary": "Which app is making your Mac hot?",
         "links": {
-            "live": "https://shafer.llc"
-        },
-        "featured": true
+            "live": "https://binnacle.shafer.llc"
+        }
+    },
+    {
+        "slug": "bilge",
+        "title": "Bilge",
+        "summary": "Clean up your Mac, Trash-first.",
+        "links": {
+            "live": "https://bilge.shafer.llc"
+        }
     },
     {
         "slug": "placehold-cloud",

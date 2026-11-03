@@ -2,7 +2,7 @@
 
 @section('title', 'Projects · Tom Shafer')
 
-@section('meta_description', 'Selected projects from Tom Shafer / Shafer LLC.')
+@section('meta_description', 'Apps and tools from Shafer LLC.')
 
 @section('content')
     <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 lg:py-20">
@@ -22,5 +22,10 @@
                 </li>
             @endforeach
         </ul>
+
+        <p class="mt-12 text-sm text-muted">
+            Client work is at <a href="https://shafer.llc/portfolio" rel="noopener" class="text-warm hover:text-copper">shafer.llc</a>.
+            <a href="https://shafer.llc/contact" rel="noopener" class="text-copper hover:text-warm">Start a project</a>.
+        </p>
     </div>
 @endsection
